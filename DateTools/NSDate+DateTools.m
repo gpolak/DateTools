@@ -762,6 +762,21 @@ static NSCalendar *implicitCalendar = nil;
 
 #pragma mark - Date Editing
 #pragma mark Date By Adding
+
+- (NSDate *)firstDayOfWeek {
+    NSDate *today = [NSDate date];
+    NSCalendar *calendar = [[self class] implicitCalendar];
+    
+    NSDateComponents *weekdayComponents = [calendar components:NSWeekdayCalendarUnit fromDate:today];
+    NSDateComponents *componentsToSubtract = [NSDateComponents new];
+    // Substract [gregorian firstWeekday] to handle first day of the week being something else than Sunday
+    [componentsToSubtract setDay: - ([weekdayComponents weekday] - [calendar firstWeekday])];
+    NSDate *beginningOfWeek = [calendar dateByAddingComponents:componentsToSubtract toDate:today options:0];
+    
+    // normalize to midnight
+    return [NSDate dateWithYear:beginningOfWeek.year month:beginningOfWeek.month day:beginningOfWeek.day];
+}
+
 /**
  *  Returns a date representing the receivers date shifted later by the provided number of years.
  *
