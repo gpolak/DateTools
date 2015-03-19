@@ -90,6 +90,8 @@ NSLocalizedStringFromTableInBundle(key, @"DateTools", [NSBundle bundleWithPath:[
 
 #pragma mark - Date Editing
 #pragma mark Date By Adding
+- (NSDate *)firstDayOfWeek;
+
 - (NSDate *)dateByAddingYears:(NSInteger)years;
 - (NSDate *)dateByAddingMonths:(NSInteger)months;
 - (NSDate *)dateByAddingWeeks:(NSInteger)weeks;
